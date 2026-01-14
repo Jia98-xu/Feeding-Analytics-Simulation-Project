@@ -11,19 +11,23 @@ SIM_STATUES_URL = 'http://127.0.0.1:8000/api/feedings/simulator/status/'  # 模�
 #--生成随机数据--
 def generate_activity():
     """生成随机的喂食活动数据"""
-    return round(random.uniform(0, 10), 2)  # 喂食量，单位为公斤
+    return round(random.uniform(0, 1), 2)  
 
 def generate_temperature():
     """生成随机的温度数据"""
-    return round(random.uniform(25, 32), 1)  # 温度，单位为摄氏度
+    return round(random.uniform(25, 32), 1)
 
 def generate_oxygen():
     """生成随机的溶解氧数据"""
-    return round(random.uniform(3, 8), 2)  # 溶解氧，单位为mg/L
+    return round(random.uniform(3, 8), 2)  
 
 def generate_ph():
     """生成随机的pH值数据"""
-    return round(random.uniform(6.5, 8.0), 2)  # pH值
+    return round(random.uniform(7.5, 8.5), 2)
+
+def generate_turbidity():
+    return round(random.uniform(10, 40), 1)
+
 
 #--发送数据--
 def send_feeding():
@@ -33,6 +37,7 @@ def send_feeding():
         'temperature': generate_temperature(),
         'oxygen': generate_oxygen(),
         'ph': generate_ph(),
+        'turbidity': generate_turbidity(),
     }
     try:
         response = requests.post(API_URL, json=data)
